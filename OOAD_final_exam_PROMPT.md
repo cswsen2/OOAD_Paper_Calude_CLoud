@@ -160,6 +160,7 @@ Rules:
 - MCQ snippets are 8–30 lines, with `class` + `main` whenever output is asked for. Number the lines (`1  public class …`) whenever the question refers to one.
 - **Verification is mandatory.** If a JDK is available, write every snippet and every model solution to a temp directory, `javac` + `java` it, and confirm each stated output byte-for-byte, including spaces and newlines. Run each threaded program **at least 20 times** and confirm identical output. For "which outputs are POSSIBLE" questions, justify every possible option with an explicit interleaving and every impossible one with the ordering guarantee (`join`, `synchronized`, `wait`/`notify`) that rules it out. Clean up temp files afterwards. If there is no JDK, hand-trace every snippet twice independently.
 - In the HTML, escape `<`, `>` and `&`, and render code in `<pre><code>` so whitespace survives.
+- **Code-block formatting**: monospace, `white-space: pre`, `tab-size: 4`. Line numbers go in a separate **non-selectable gutter** (so Copy gives clean code), never typed into the code text. Each block has a filename caption and a Copy button. Long lines **scroll horizontally inside the block**. They are never wrapped, clipped, or allowed to spill over neighbouring content, and the page itself never scrolls sideways.
 
 ---
 
@@ -171,6 +172,9 @@ Rules:
   - **Use case diagrams**: system boundary with name, stick-figure actors outside, ellipses inside, dashed `<<include>>` / `<<extend>>` arrows in the correct direction.
   - **Activity diagrams**: filled-circle initial node, bullseye final node, rounded action nodes, diamond decision/merge with guards, thick bar fork/join, swimlanes, exactly as in `Activity_Diagrams.md`.
 - A diagram must carry information needed for the answer, never decoration. It must stay legible at ~360 px wide, with arrowheads and diamonds clearly distinguishable.
+- **No overlaps, ever.** Lay diagrams out on a grid with orthogonal (horizontal/vertical) connectors. Size every box from its longest text line, with ≥ 6 px padding, not by guesswork. Keep ≥ 6 px clearance between any label and any line, diamond, arrowhead, box edge or other label. Multiplicity, role and stereotype labels sit **beside** their line, never on top of it. Boxes never touch.
+- **Phone width**: give each SVG a `min-width` (~600 px) inside a horizontally scrollable figure with a small "scroll sideways" hint below 680 px, so text never shrinks below ~11 px on a phone.
+- **Render check**: open the app in a headless browser (Playwright/Chromium if available) at **360 px and 1280 px** wide. Screenshot every diagram and every code block, and **look at the screenshots**. Also run a script that compares the `getBBox()` of every SVG `<text>` against every other text, every line/diamond/arrowhead and its containing box, and fails on any intersection or spill. Fix and re-check until clean.
 - Diagram strokes and text use the palette's text/ink colours (STEP 9) on the card background.
 
 ---
@@ -198,7 +202,7 @@ Rules:
 When the student submits a written answer, the app **pre-ticks rubric points automatically** using keyword/regex checks. **The student can override any tick.**
 
 - Each rubric point is `{ text, marks, auto, check }`, where `check = { all: [regex…], any: [regex…], none: [regex…], ci: true|false }`. A point passes when every `all` pattern matches, at least one `any` pattern matches (if `any` is given), and no `none` pattern matches.
-- **Preprocessing before checking**: for code answers, strip `//` and `/* */` comments so that keywords in comments don't count, and collapse runs of whitespace to a single space. Prose checks are case-insensitive (`ci: true`). Code checks are case-sensitive.
+- **Preprocessing before checking**: for code answers, strip `//` and `/* */` comments, **outside string literals**, so that keywords in comments don't count. Do **not** collapse whitespace: it would corrupt string literals such as `"  cleaning"`. Rely on `\s*`-tolerant patterns instead. Prose checks are case-insensitive (`ci: true`). Code checks are case-sensitive.
 - **Write tolerant patterns.** Allow flexible whitespace (`\s*`) and modifier order (`(public\s+)?(static\s+)?synchronized`). Use `\w+` where the student picks the name, and exact names only where the question fixes them. Structural checks should be specific enough to mean something, e.g. `wait()` *inside a `while`*: `while\s*\([^)]*\)\s*\{?[^}]*?\bwait\s*\(`.
 - Points that can't sensibly be keyword-checked (e.g. a justification's quality) are `auto: false`. They start unticked and show a hint: "Tick if your answer says the part cannot exist without the whole".
 - Show auto-ticked points with an **"auto"** badge and overridden ones with an **"edited"** badge.
@@ -277,6 +281,7 @@ Do **not** write an audit or report file. Silently make sure that:
 - Every Java snippet and model solution compiles and produces exactly the stated output (threads: 20 identical runs).
 - `index.html?selftest=1` reports zero failures.
 - `index.html` loads with no console errors (use a headless browser if available), and every SVG renders.
+- The STEP 6 render check passes at 360 px and 1280 px: no SVG text overlaps, every label clears lines and diamonds, every code block scrolls inside itself, and the page has no horizontal scroll.
 - The reference sheet is exactly 2 A4 pages.
 
 Fix anything that fails. Then reply with a summary of **≤ 10 lines**: what was generated, the Section 3 scenarios and pattern pair, and anything you had to compromise on.
