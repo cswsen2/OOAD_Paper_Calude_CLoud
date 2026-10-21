@@ -37,7 +37,7 @@ Do **not** write a style-notes file, an audit file, or any report. Do your analy
 
 ## STEP 1 — SCOPE RULES
 
-- **Section 1 (MCQs)** may draw from **every lecture note** (the exam notice says "all topics discussed in class"), weighted towards final-only material (see STEP 2).
+- **Section 1 (MCQs)** may draw from **every lecture note** (the exam notice says "all topics discussed in class"). It is **weighted towards the early lectures**, because Sections 2–3 already concentrate on the later ones (see STEP 2).
 - **Sections 2 and 3** stick to the focus areas the exam notice lists (STEP 3, STEP 4).
 - If a rule, keyword, API or notation does not appear in the notes, it **cannot be the correct answer** to anything. It may appear as a distractor, and the explanation must say it is outside the notes.
 - **Use the course's own rule sets, not textbook versions.** Examples:
@@ -70,19 +70,19 @@ Do **not** write a style-notes file, an audit file, or any report. Do your analy
 
 | # | Topic (notes file) | Count | Shape |
 |---|---|---|---|
-| 1 | Exceptions (`Errors_and_Exceptions.md`) | 2 | One exact-output trace through try / catch / `finally` / `throws` propagation. One compile-time question: catch-clause order, unreported checked exception, or multi-catch with related types |
-| 2 | Threads (`Threads.md`) | 2 | One "which outputs are POSSIBLE" multi-answer over `start()` / `join()` / `synchronized`. One on `wait`/`notify`/`notifyAll`/`sleep` lock semantics or lifecycle state transitions |
-| 3 | Collections (`Java_Collections_Framework.md`) | 1 | Trace a program mixing List / Set / Map / Stack / Queue and predict the exact output: duplicates, `TreeSet` ordering, `HashMap` key overwrite, `Stack` pop order, queue order |
-| 4 | Generics (`Java_Generics.md`) | 1 | Which statements compile: bounded types, multiple bounds, wildcards, autoboxing, the notes' generics limitations |
-| 5 | Design patterns (`Design_Patterns.md`, `Singleton_Pattern.md`, `Factory_Pattern.md`, `Command_Pattern.md`) | 2 | One creational (Singleton thread-safety options, or Factory Method vs Abstract Factory). One from Command / Bridge / Strategy / Template Method: identify the pattern or a participant's role from code or a class diagram |
-| 6 | Activity diagrams (`Activity_Diagrams.md`) | 1 | Interpret an SVG activity diagram: fork/join vs decision/merge, swimlanes, which execution trace is valid |
-| 7 | UML class relationships (`UML_Class_Relationships.md` + the five relationship files) | 1 | Code ↔ diagram, lifetime ⇒ composition vs aggregation, multiplicity, dependency vs association |
-| 8 | Use case diagrams (`Use_Case_Diagrams.md`) | 1 | `<<include>>` vs `<<extend>>`, actor vs system, boundary errors, from a scenario or a supplied diagram |
-| 9 | Requirements Engineering (`Requirements_Engineering.md`) | 1 | Applied: FR/NFR classification, defect in a stated requirement, elicitation technique for a situation |
-| 10 | OO analysis (`OO_Analysis_Noun_Verb.md`, `CRC_Cards.md`) | 1 | Five rejection rules applied to a scenario, or responsibility/collaborator placement on CRC cards |
-| 11 | Java and OOP core (`Java_Programming.md`, `OOP_Fundamentals.md`, `Function_Overloading_and_Constructors.md`) | 1 | Overload resolution, constructor chaining, `static` vs instance, pass-by-value of references, interface vs abstract class |
+| 1 | Java and OOP core (`Java_Programming.md`, `OOP_Fundamentals.md`, `OOAD_Module_Overview.md`) | 1 | `static` vs instance, pass-by-value of references, encapsulation/access modifiers, interface vs abstract class: an exact-output trace or a compile check |
+| 2 | Overloading and constructors (`Function_Overloading_and_Constructors.md`) | 1 | Overload resolution (widening vs boxing, near-ambiguity), constructor chaining with `this()`/`super()`, a removed default constructor |
+| 3 | Requirements Engineering (`Requirements_Engineering.md`) | 2 | Applied: FR vs NFR classification; a defect in a stated requirement (ambiguous / unverifiable / inconsistent); the elicitation technique for a described situation; requirements vs features vs goals |
+| 4 | Use case diagrams (`Use_Case_Diagrams.md`) | 2 | One from a scenario (which relationship or diagram is correct, `<<include>>` vs `<<extend>>` and arrow direction). One spot-the-error in a supplied SVG diagram (boundary, actor placement, generalisation, arrow direction) |
+| 5 | UML class relationships (`UML_Class_Relationships.md` + the five relationship files) | 1 | Code ↔ diagram, lifetime ⇒ composition vs aggregation, multiplicity, dependency vs association. **Must test a different angle from Q2.2** |
+| 6 | OO analysis (`OO_Analysis_Noun_Verb.md`, `CRC_Cards.md`) | 1 | Five rejection rules applied to a scenario, or responsibility/collaborator placement on CRC cards. **Must test a different angle from Q2.1** |
+| 7 | Activity diagrams (`Activity_Diagrams.md`) | 1 | Interpret an SVG activity diagram: fork/join vs decision/merge, swimlanes, which execution trace is valid |
+| 8 | Exceptions (`Errors_and_Exceptions.md`) | 1 | Either an exact-output trace through try / catch / `finally` / `throws` propagation, or a compile-time question (catch-clause order, unreported checked exception, multi-catch with related types) |
+| 9 | Threads (`Threads.md`) | 1 | Either "which outputs are POSSIBLE" over `start()` / `join()` / `synchronized`, or `wait`/`notify`/`notifyAll`/`sleep` lock semantics and lifecycle state transitions |
+| 10 | Collections and generics (`Java_Collections_Framework.md`, `Java_Generics.md`) | 1 | Either a trace mixing List / Set / Map / Stack / Queue (duplicates, `TreeSet` order, `HashMap` key overwrite, pop/queue order), or which generic statements compile (bounds, wildcards, autoboxing, limitations) |
+| 11 | Design patterns (`Design_Patterns.md`, `Singleton_Pattern.md`, `Factory_Pattern.md`, `Command_Pattern.md`) | 2 | Together they test the **two notice patterns (Abstract Factory / Command / Singleton / Bridge) that Section 3 does not use**: identify the pattern or a participant's role from code or a class diagram, or the Singleton thread-safety options. Strategy, Template Method and Factory Method may appear as distractors or comparison points |
 
-That gives 9 final-only questions (rows 1–6) and 5 mid-term questions (rows 7–11).
+**Weighting:** rows 1–7 (**9 questions**) cover the early lectures plus activity diagrams. Rows 8–11 (**5 questions**) cover the later lectures. This balances the paper. Q2.3, Q2.4 and all of Section 3 (55 marks) already concentrate on the later lectures. And the MCQs are the **only** place Requirements Engineering, use case diagrams, activity diagrams and overloading/constructors get tested. Q2.1 and Q2.2 cover noun/verb and class relationships, so rows 5 and 6 must not examine the same thing twice.
 
 ### 2.3 Required forms (spread across the 14, not extra questions)
 
@@ -90,7 +90,7 @@ That gives 9 final-only questions (rows 1–6) and 5 mid-term questions (rows 7�
 - ≥ **3** contain a diagram (activity diagram, use case or class diagram, pattern structure).
 - ≥ **3** are negated (`NOT`, `would FAIL to compile`, `LEAST appropriate`, `IMPOSSIBLE`).
 - ≥ **1** "Student A says X, Student B says Y — who is correct and why?" (as best-answer, all four options pairing a verdict with a reason).
-- ≥ **2** combine two topics: e.g. Singleton + `synchronized`; a generic class stored in a collection; an exception thrown inside `run()`; a Command invoker holding a `Stack<Command>` for undo; a class diagram whose relationship must be read off constructor code.
+- ≥ **2** combine two topics, e.g. a use case scenario whose nouns must be filtered by the five rejection rules; a requirement that must be classified and then traced to the right use case; a class diagram whose relationship must be read off constructor code; Singleton + `synchronized`; an exception thrown inside `run()`.
 
 ### 2.4 Option-design rules (the most important part of Section 1)
 
@@ -115,7 +115,7 @@ Earlier attempts failed because the correct answer was always the longest, most 
 | 2 — Applied | 2–3 reasoning steps or a short trace | 5 |
 | 3 — Hard | 4+ steps, two concepts interacting, needs scratch working, 2–4 min | 7 |
 
-Twist deliberately: add a line that looks decisive but isn't; a `finally` that overwrites a return value; a `catch (Exception e)` placed before `catch (IOException e)`; a thread started with `run()` instead of `start()`; a Singleton whose constructor is accidentally `public`; a generic method whose bound is *almost* satisfied; a diagram with one correct relationship and one wrong multiplicity. Never ask the plain definitional form of a concept when an applied form is available.
+Twist deliberately: add a line that looks decisive but isn't; an overload that is *almost* ambiguous; a `this()` call that runs a different constructor body first; an `<<extend>>` arrow pointing the wrong way; a requirement that sounds non-functional but is actually functional; a noun that looks like an attribute but is meta-language; a `finally` that overwrites a return value; a `catch (Exception e)` placed before `catch (IOException e)`; a thread started with `run()` instead of `start()`; a Singleton whose constructor is accidentally `public`; a generic method whose bound is *almost* satisfied; a diagram with one correct relationship and one wrong multiplicity. Never ask the plain definitional form of a concept when an applied form is available.
 
 ---
 
@@ -145,7 +145,7 @@ The notice says students "will be provided with a basic code structure to follow
 
 Rules:
 
-- **3.2 pattern pair**: at least one of the two must be **Bridge or Abstract Factory**. The pair must **not** be Command + Singleton or Abstract Factory + Singleton, because the past papers already used both. Any of the four patterns not used in Section 3 must be tested in Section 1 or 2.
+- **3.2 pattern pair**: at least one of the two must be **Bridge or Abstract Factory**. The pair must **not** be Command + Singleton or Abstract Factory + Singleton, because the past papers already used both. The two patterns not used in Section 3 must be tested by the two design-pattern MCQs (STEP 2.2, row 11).
 - **At least one Section 3 problem requires the student to write a generic class or generic method.**
 - **Deterministic output.** Thread problem 3.1 must be designed so the correct solution prints **identical output every run** (strict turn-taking through `wait`/`notifyAll`, or `join`-based ordering). Never mark on an interleaving the student can't control.
 - **Harder than the past papers.** Each problem has at least one sub-part needing a non-obvious decision, for example: `while` not `if` around `wait()`; `notifyAll` vs `notify` with more than two threads; which object to lock on; where the Singleton's lock goes; which participant holds the Bridge reference; making undo work after a macro command. The starter code should also contain **one planted defect** the student must spot and fix as a marked sub-part, e.g. `t.run()` instead of `t.start()`, a `public` Singleton constructor, or a catch block that swallows `InterruptedException` and loops forever.
