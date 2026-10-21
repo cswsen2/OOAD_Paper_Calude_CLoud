@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OOAD Reference Sheet</title>
+<script>
+try {
+    var savedTheme = localStorage.getItem("ooad-theme");
+    if (savedTheme === "light" || savedTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+} catch (e) { /* storage blocked: follow the device setting */ }
+</script>
+<style>
+:root {
+    color-scheme: light;
+    --bg: #FAF7F0;
+    --card: #FFFDF8;
+    --heading: #7A1E2C;
+    --primary: #2B3A55;
+    --border: #E3DCCB;
+    --text: #1F1F1F;
+    --code-bg: #F1ECE1;
+    --code-text: #2B2B2B;
+    --muted: rgba(31, 31, 31, 0.68);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #1B1814;
+        --card: #24201B;
+        --heading: #E39AA5;
+        --primary: #A9BCE0;
+        --border: #3A342C;
+        --text: #ECE6DA;
+        --code-bg: #2B2620;
+        --code-text: #E8E1D3;
+        --muted: rgba(236, 230, 218, 0.68);
+    }
+}
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #1B1814;
+    --card: #24201B;
+    --heading: #E39AA5;
+    --primary: #A9BCE0;
+    --border: #3A342C;
+    --text: #ECE6DA;
+    --code-bg: #2B2620;
+    --code-text: #E8E1D3;
+    --muted: rgba(236, 230, 218, 0.68);
+}
+@page { size: A4; margin: 10mm; }
+* { box-sizing: border-box; }
+body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 7.6pt/1.2 Arial, Helvetica, "Liberation Sans", sans-serif;
+}
+.toolbar {
+    max-width: 210mm; margin: 14px auto 0; display: flex; justify-content: space-between;
+    align-items: center; gap: 10px; font: 13px system-ui, sans-serif; color: var(--muted);
+}
+.toolbar button {
+    font: 600 13px system-ui, sans-serif; color: var(--primary); background: var(--card);
+    border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; cursor: pointer;
+}
+.sheet {
+    width: 190mm; height: 277mm; margin: 14px auto; padding: 0;
+    column-count: 3; column-gap: 3.4mm; column-fill: auto; column-rule: 0.4pt solid var(--border);
+    overflow: hidden; background: var(--card);
+    outline: 10mm solid var(--card); box-shadow: 0 0 0 calc(10mm + 1px) var(--border);
+}
+.sheet + .sheet { margin-top: calc(14px + 20mm); }
+.title {
+    column-span: all; display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1.2pt solid var(--heading); padding-bottom: 1mm; margin-bottom: 1.6mm;
+}
+.title b { font: 700 11pt Georgia, "Palatino Linotype", serif; color: var(--heading); }
+.title span { font-size: 7.5pt; color: var(--muted); }
+h2 {
+    font: 700 8.4pt Arial, sans-serif; color: var(--heading); margin: 1.2mm 0 0.5mm;
+    text-transform: uppercase; letter-spacing: 0.03em; break-after: avoid;
+    border-bottom: 0.4pt solid var(--border);
+}
+h3 { font: 700 8pt Arial, sans-serif; color: var(--primary); margin: 1.1mm 0 0.3mm; break-after: avoid; }
+p { margin: 0 0 0.8mm; }
+ul { margin: 0 0 0.8mm; padding-left: 3.2mm; }
+li { margin: 0 0 0.1mm; }
+code, pre { font-family: Consolas, "Liberation Mono", "Courier New", monospace; font-size: 7.5pt; }
+code { background: var(--code-bg); color: var(--code-text); padding: 0 0.5mm; border-radius: 0.6mm; }
+pre {
+    background: var(--code-bg); color: var(--code-text); margin: 0.4mm 0 1mm; padding: 0.8mm 1.2mm;
+    border-radius: 1mm; white-space: pre; line-height: 1.13; break-inside: avoid; overflow: hidden;
+}
+table { border-collapse: collapse; width: 100%; margin: 0.3mm 0 1mm; break-inside: avoid; }
+th, td { border: 0.4pt solid var(--border); padding: 0.2mm 0.7mm; text-align: left; vertical-align: top; }
+th { background: var(--code-bg); color: var(--primary); font-weight: 700; }
+.k { font-weight: 700; color: var(--primary); }
+.box { break-inside: avoid; }
+.note { color: var(--muted); }
+@media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+        color-scheme: light;
+        --bg: #FFFFFF; --card: #FFFFFF; --heading: #7A1E2C; --primary: #2B3A55;
+        --border: #BDB5A3; --text: #111111; --code-bg: #F1ECE1; --code-text: #111111;
+        --muted: #444444;
+    }
+    body { background: #FFFFFF; }
+    .toolbar { display: none; }
+    .sheet { margin: 0; outline: none; box-shadow: none; break-after: page; }
+    .sheet + .sheet { margin-top: 0; }
+    .sheet:last-of-type { break-after: auto; }
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+    <span>SE2012 OOAD · A4 reference sheet: 2 pages, print double-sided. Printing always uses the light colours.</span>
+    <button type="button" onclick="window.print()">Print</button>
+</div>
+
+<!-- =============================== PAGE 1 =============================== -->
+<section class="sheet" id="sheet1">
+<div class="title"><b>SE2012 OOAD — Reference Sheet 1/2</b><span>Java · Exceptions · Threads · Collections · Generics · OO analysis — from the lecture notes only</span></div>
+
+<h2>Java &amp; OOP core</h2>
+<table>
+<tr><th>Modifier</th><th>Visible to</th></tr>
+<tr><td><code>public</code></td><td>any class</td></tr>
+<tr><td><code>protected</code></td><td>same package + subclasses</td></tr>
+<tr><td>(default)</td><td>same package only</td></tr>
+<tr><td><code>private</code></td><td>same class only</td></tr>
+</table>
+<ul>
+<li><span class="k">static</span>: belongs to the class, not to instances. One copy is shared by every object.</li>
+<li>One public class per <code>.java</code> file, and the file name must match it.</li>
+<li><span class="k">Constructor</span>: same name as the class and <b>no return type, not even void</b>. It runs automatically when an object is created. Default = no parameters; overloaded = takes parameters. <code>this(...)</code> calls another constructor. A method <code>void Room()</code> is just a method.</li>
+<li><span class="k">Overloading</span>: same name, <b>different parameters</b>.</li>
+<li><span class="k">Encapsulation</span>: group attributes and methods; keep data private and reach it through public methods (information hiding). <span class="k">Abstraction</span>: keep only the essentials, relative to the viewer's perspective.</li>
+<li>4 pillars: abstraction, encapsulation, inheritance, polymorphism (different objects treated uniformly through one interface).</li>
+<li>Class = blueprint (common noun); object = specific instance (proper noun).</li>
+</ul>
+
+<h2>Exceptions</h2>
+<pre>Throwable
+├ Error (unchecked)
+│   OutOfMemoryError …
+└ Exception (CHECKED)
+  │ IOException, SQLException …
+  └ RuntimeException (unchecked)
+      Arithmetic, NullPointer,
+      ArrayIndexOutOfBounds,
+      NumberFormat, ClassCast,
+      IllegalArgument,
+      IllegalMonitorState …</pre>
+<ul>
+<li><span class="k">Catch or specify</span>: code that can throw a <b>checked</b> exception must catch it or declare it with <code>throws</code>. The compiler enforces this. Unchecked exceptions are exempt.</li>
+<li><code>throw new X("msg")</code> throws; <code>throws X, Y</code> declares (comma-separated).</li>
+<li>Once a statement throws, the rest of the <code>try</code> is skipped. Control never returns to the try; it carries on after the try/catch.</li>
+<li><span class="k">Multiple catch</span>: catches are inspected in order; the first match runs and the rest are skipped.</li>
+<li><span class="k">Multi-catch</span> (Java 7): <code>catch (IOException | SQLException e)</code>. The parameter is implicitly <b>final</b> and cannot be reassigned.</li>
+<li><span class="k">finally</span> runs whether or not an exception is thrown or caught (use it for house-keeping).</li>
+<li><span class="k">Nested try</span>: if the inner try has no match, the parent try's catches are inspected.</li>
+<li>Uncaught: the default handler prints the stack trace and terminates the program.</li>
+<li>Compile-time errors: no <code>.class</code> file is produced. Run-time errors: it compiles, then fails while running.</li>
+</ul>
+<pre>class MyEx extends Exception {
+    MyEx(String m) { super(m); }
+}   // checked: catch or declare
+catch (MyEx e) { e.getMessage(); }</pre>
+
+<h2>Threads</h2>
+<table>
+<tr><th>From</th><th>Event</th><th>To</th></tr>
+<tr><td>New</td><td><code>start()</code></td><td>Runnable / Ready</td></tr>
+<tr><td>Ready</td><td>scheduler</td><td>Running (run() executes)</td></tr>
+<tr><td>Running</td><td><code>yield()</code></td><td>Ready</td></tr>
+<tr><td>Running</td><td><code>sleep()</code> / <code>wait()</code> / I/O</td><td>Sleeping / Waiting / Blocked</td></tr>
+<tr><td>Waiting</td><td><code>notify()</code>, <code>notifyAll()</code></td><td>Ready</td></tr>
+<tr><td>Running</td><td>run() ends</td><td>Dead</td></tr>
+</table>
+<ul>
+<li>Create: <code>extends Thread</code>, or <code>implements Runnable</code> + <code>new Thread(r)</code>. Override <code>run()</code>.</li>
+<li><span class="k">start()</span> creates a new thread, and the JVM calls run(). Calling <code>run()</code> directly is an ordinary call on the <b>current</b> thread.</li>
+<li><span class="k">join()</span>: the caller waits until that thread dies. <span class="k">yield()</span>: Running → Ready (gives same-priority threads a turn).</li>
+<li><span class="k">sleep(ms)</span> <b>keeps</b> the lock and throws InterruptedException.</li>
+<li><span class="k">wait()</span> <b>releases</b> the lock, moves to Waiting, and throws InterruptedException. <span class="k">notify()</span> wakes <b>one</b> waiting thread (→ Ready). <span class="k">notifyAll()</span> wakes <b>all</b> threads waiting on that object. They must be called while holding the lock, otherwise IllegalMonitorStateException.</li>
+<li>Priority: min 1, normal 5, max 10. Daemon threads die when the JVM exits (when only daemons are left).</li>
+<li>Threads share code, data (static + heap) and open files; each has its own ID, registers and stack.</li>
+<li><span class="k">Race condition</span>: the result depends on scheduling when threads modify shared data without synchronization.</li>
+</ul>
+<pre>synchronized void m() { … }
+    // locks this object
+synchronized (shared) { … }
+    // locks shared
+synchronized (new Object()) { … }
+    // WRONG: new lock each call
+
+// guarded wait: re-check on waking
+synchronized void take()
+        throws InterruptedException {
+    while (!ready) { wait(); }
+    …   // condition holds here
+}
+synchronized void give() {
+    ready = true;
+    notifyAll();
+}</pre>
+
+<h2>Collections (java.util)</h2>
+<pre>Collection
+├ List : ArrayList, LinkedList,
+│        Vector → Stack
+├ Queue: PriorityQueue, LinkedList
+│        (Deque → ArrayDeque)
+└ Set  : HashSet, LinkedHashSet,
+         SortedSet → TreeSet
+Map (NOT a Collection):
+  HashMap, LinkedHashMap, TreeMap</pre>
+<table>
+<tr><th>Class</th><th>Rules</th><th>Methods</th></tr>
+<tr><td>ArrayList</td><td>dups; insertion order; index</td><td>add, get, remove, size</td></tr>
+<tr><td>Stack</td><td>dups; <b>LIFO</b></td><td>push, pop, peek</td></tr>
+<tr><td>Queue (LinkedList)</td><td>dups; <b>FIFO</b></td><td>add, poll, peek</td></tr>
+<tr><td>PriorityQueue</td><td>comparator order</td><td>add, poll, peek</td></tr>
+<tr><td>HashSet</td><td>no dups; unordered</td><td>add (false if present)</td></tr>
+<tr><td>LinkedHashSet</td><td>no dups; insertion</td><td>add, contains</td></tr>
+<tr><td>TreeSet</td><td>no dups; <b>sorted asc.</b></td><td>add, contains</td></tr>
+<tr><td>HashMap</td><td>unique keys; unordered</td><td>put (overwrites), get</td></tr>
+<tr><td>LinkedHashMap</td><td>unique keys; insertion</td><td>put, get</td></tr>
+<tr><td>TreeMap</td><td>unique keys; sorted</td><td>put, get</td></tr>
+</table>
+<p>Collection methods: <code>add remove size isEmpty contains clear addAll iterator toArray</code>. Printing a collection gives <code>[a, b, c]</code>. Arrays have a fixed length; an ArrayList grows.</p>
+
+<h2>Generics</h2>
+<ul>
+<li>"Parameterized types": type-safe, no casts needed, checked at <b>compile time</b>. Conventions: T type, E element, K key, V value, N number.</li>
+<li><b>No primitives</b>: use wrappers (int→Integer, char→Character, double→Double…). Autoboxing: primitive→object; unboxing: object→primitive (since J2SE 5.0).</li>
+</ul>
+<pre>class Box&lt;T&gt; {
+    T obj;
+    void add(T v) { obj = v; }
+    T get() { return obj; }
+}
+class Pair&lt;T, V&gt; { … }  // 2 params
+static &lt;E&gt; void show(E[] a) { … }
+class Stats&lt;T extends Number&gt; {
+  … nums[i].doubleValue() … }
+&lt;T extends Cls &amp; Intf&gt; // class 1st
+void draw(List&lt;? extends Shape&gt; l)</pre>
+<p><span class="k">Limitations</span>: no <code>new T()</code>; no static member using the class's T (static generic methods are OK); no arrays of a type parameter; no generic exception classes (cannot extend Throwable). <code>Stats&lt;String&gt;</code> fails: String is not a Number.</p>
+<h2>OO analysis: noun/verb &amp; CRC</h2>
+<ul>
+<li>Nouns → candidate classes (common noun = class, proper noun = object). Verbs → candidate methods. Unclear owner? Use CRC cards.</li>
+<li><span class="k">5 rejection rules</span>: <b>Redundant</b> (same concept, two names) · <b>Meta-language</b> (words about the text or language itself) · <b>Event or Operation</b> (something that happens) · <b>Outside scope of system</b> · <b>An attribute</b> (a property of another class).</li>
+<li><span class="k">CRC card</span>: class name (top) | Responsibilities (left) | Collaborators (right). Responsibilities come from verbs and are <b>not</b> methods (one may need several methods). A collaborator is a class needed to meet a responsibility; a card can have none.</li>
+<li>An actor becomes an entity class only if its data matters to the domain. Analysis classes: «entity» (domain data), «boundary» (one per actor: forms, reports), «control» (one per complex use case).</li>
+</ul>
+</section>
+
+<!-- =============================== PAGE 2 =============================== -->
+<section class="sheet" id="sheet2">
+<div class="title"><b>SE2012 OOAD — Reference Sheet 2/2</b><span>Design patterns · UML · Use cases · Activity diagrams · Requirements — from the lecture notes only</span></div>
+
+<h2>Design patterns</h2>
+<p><span class="k">Creational</span>: Singleton, Factory Method, Abstract Factory. <span class="k">Behavioral</span> (lecture's grouping): Command, Strategy, Bridge*, Template Method. <span class="note">*GoF lists Bridge as structural.</span></p>
+<h3>Singleton: one instance + global access point</h3>
+<pre>private static S unique;
+private S() { }
+// lazy: single-threaded only
+static S getInstance() {
+  if (unique == null)
+      unique = new S();
+  return unique; }
+// safe but costly:
+static synchronized S getInstance()
+// eager, created at class load:
+private static S unique = new S();
+// double-checked locking:
+private volatile static S unique;
+  if (unique == null)
+    synchronized (S.class) {
+      if (unique == null)
+        unique = new S(); }
+// simplest:
+enum S { UNIQUE_INSTANCE; }</pre>
+<p>It needs a private constructor, a private static instance and a static getInstance(). Pitfalls: several class loaders can each make one; it is tightly coupled; it has two responsibilities.</p>
+<h3>Factory Method vs Abstract Factory</h3>
+<ul>
+<li><span class="k">Factory Method</span>: relies on <b>inheritance</b>; subclasses decide which product to create (abstract <code>createX()</code>). Steps: interface → concrete classes → Factory → client passes a type.</li>
+<li><span class="k">Abstract Factory</span>: an interface for creating <b>families</b> of related objects without naming concrete classes. It relies on object <b>composition</b>. Each concrete factory produces one consistent family. A <code>FactoryProducer</code> returns the right factory.</li>
+</ul>
+<p>Notes' example: <code>PizzaIngredientFactory</code> declares <code>createDough()</code>, <code>createSauce()</code>, …; <code>NYPizzaIngredientFactory</code> returns ThinCrustDough, MarinaraSauce…, and <code>ChicagoPizzaIngredientFactory</code> returns ThickCrustDough, PlumTomatoSauce…, one whole regional family each.</p>
+<h3>Command: decouples requester from performer</h3>
+<table>
+<tr><th>Role</th><th>Job</th></tr>
+<tr><td>Client</td><td>creates ConcreteCommands and sets each one's Receiver</td></tr>
+<tr><td>Command</td><td>interface: <code>execute()</code> (+ <code>undo()</code>)</td></tr>
+<tr><td>ConcreteCommand</td><td>binds an action to a Receiver</td></tr>
+<tr><td>Invoker</td><td>holds commands and calls <code>execute()</code></td></tr>
+<tr><td>Receiver</td><td>knows how to do the actual work</td></tr>
+</table>
+<ul>
+<li><span class="k">NoCommand</span> (null object): its <code>execute(){}</code> does nothing, so slots need no null checks.</li>
+<li><span class="k">undo()</span> mirrors execute() (on ↔ off). History in a <code>Stack</code>: <code>pop()</code> the last command, then undo it.</li>
+<li><span class="k">MacroCommand</span>: holds an array or list of commands; execute runs them in order, and <b>undo runs them in REVERSE</b> (last one first).</li>
+</ul>
+<h3>Bridge · Strategy · Template Method</h3>
+<ul>
+<li><span class="k">Bridge</span>: vary the abstraction and the implementation independently by placing them in <b>separate hierarchies</b>. The abstraction holds a reference to the implementor interface. Adding an implementor changes no abstraction class.</li>
+<li><span class="k">Strategy</span>: a family of interchangeable behaviours, swapped at run time (<code>setFlyBehaviour(...)</code>).</li>
+<li><span class="k">Template Method</span>: a <code>final</code> method fixes the steps of an algorithm; subclasses implement the abstract steps.</li>
+</ul>
+
+<h2>UML class relationships (weakest → strongest)</h2>
+<table>
+<tr><th>Relationship · notation</th><th>Test</th><th>In Java</th></tr>
+<tr><td><b>Dependency</b> · dashed arrow → used class</td><td>uses briefly</td><td>parameter / local only</td></tr>
+<tr><td><b>Association</b> · plain line (arrow = one-way)</td><td>has-a, not part-of</td><td>kept in a field</td></tr>
+<tr><td><b>Aggregation</b> · hollow ◇ at the WHOLE</td><td>part CAN exist alone</td><td>part passed in (addX)</td></tr>
+<tr><td><b>Composition</b> · filled ◆ at the WHOLE</td><td>part CANNOT exist alone</td><td>whole creates the part</td></tr>
+<tr><td><b>Inheritance</b> · hollow △ at superclass</td><td>is-a-kind-of</td><td><code>extends</code></td></tr>
+</table>
+<p>Multiplicity: <code>1</code> · <code>0..1</code> · <code>0..*</code> · <code>1..*</code> · <code>n..m</code>. Composition has <code>1</code> at the whole end. Visibility: <code>+</code> public, <code>-</code> private, <code>#</code> protected. Abstract class/method names are in <i>italics</i>. An association class holds data about the link itself.</p>
+
+<h2>Use case diagrams</h2>
+<ul>
+<li><span class="k">Actor</span>: anything that interacts with the system (a person <b>or an external system</b>). Black box, always outside the boundary. Drawn as a stick figure or an «actor» box.</li>
+<li>Use case = an oval inside the system boundary: a job done for an actor, with pass/fail criteria. A communication line joins actor and use case.</li>
+<li><span class="k">«include»</span>: the base <b>always</b> includes it (purchase → process payment). <span class="k">«extend»</span>: <b>optional, under a condition</b> (seasonal discount → purchase).</li>
+<li><span class="k">Actor generalization</span>: the specialised actor can do everything the general one can, plus more (Administrator → User).</li>
+<li>Use case scenario: a step-by-step text of one path through a use case.</li>
+</ul>
+
+<h2>Activity diagrams</h2>
+<table>
+<tr><th>Element</th><th>Notation</th><th>Meaning</th></tr>
+<tr><td>Initial / final</td><td>● / bullseye ◉</td><td>start / end of the whole activity</td></tr>
+<tr><td>Action</td><td>rounded rectangle</td><td>one step</td></tr>
+<tr><td>Flow</td><td>solid arrow</td><td>control moves on</td></tr>
+<tr><td>Decision</td><td>◇, 1 in, many out</td><td>ONE path; every branch needs a [guard]</td></tr>
+<tr><td>Merge</td><td>◇, many in, 1 out</td><td>joins alternatives, does <b>not</b> wait</td></tr>
+<tr><td>Fork</td><td>thick bar, 1 in, many out</td><td>ALL paths run concurrently</td></tr>
+<tr><td>Join</td><td>thick bar, many in, 1 out</td><td>waits for <b>all</b> incoming flows</td></tr>
+<tr><td>Swimlane</td><td>partition with a name</td><td>who performs the actions</td></tr>
+</table>
+<p>Mistakes: mixing a fork with a merge diamond; a missing guard. A loop is best drawn as a decision with guards; an asterisk hides the termination condition.</p>
+
+<h2>Requirements Engineering</h2>
+<ul>
+<li><span class="k">Goal</span> (high-level objective) → <span class="k">Feature</span> (related requirements that satisfy a goal) → <span class="k">Requirement</span> (how the system achieves it).</li>
+<li>Levels: <b>user</b> (natural language, ConOps, user stories) → <b>system</b> (precise, SRS, use cases) → <b>design specification</b>.</li>
+<li><span class="k">FR</span>: services the system provides and how it reacts to inputs. FRs may state what the system should <b>NOT</b> do.</li>
+<li><span class="k">NFR</span>: security, reliability, maintainability, performance, usability, testability, interoperability, plus <b>constraints</b> (design, implementation, financial, resource). Domain requirements come from the domain.</li>
+<li>Process: Elicitation → Analysis &amp; reconciliation → Representation/modeling → Verification &amp; validation ("Am I building the right product?") → Management (change, traceability, scope creep).</li>
+<li><b>shall</b> = must be met; <b>should</b> = desirable, dropped first. User story: As a [user], I want [goal] so that [benefit].</li>
+<li>Raw requirements may be contradictory, inconsistent, incomplete, vague or wrong, or depend on each other. Representations can be informal, formal or semiformal.</li>
+</ul>
+<table>
+<tr><th>Elicitation obstacle</th><th>Handled by</th></tr>
+<tr><td>New project domain</td><td>engage a domain expert</td></tr>
+<tr><td>Unclear project vision</td><td>clear mission statement / ConOps</td></tr>
+<tr><td>Limited access to documentation</td><td>document / change management</td></tr>
+<tr><td>Focus on solution, not requirements</td><td>active expectation management</td></tr>
+<tr><td>Fixation on specific functionalities</td><td>expectation mgmt; refocus on the mission</td></tr>
+<tr><td>Contradictory requirements</td><td>reconciliation through negotiation</td></tr>
+</table>
+
+</section>
+</body>
+</html>
