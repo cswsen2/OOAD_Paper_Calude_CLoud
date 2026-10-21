@@ -160,18 +160,21 @@ Rules:
 - MCQ snippets are 8–30 lines, with `class` + `main` whenever output is asked for. Number the lines (`1  public class …`) whenever the question refers to one.
 - **Verification is mandatory.** If a JDK is available, write every snippet and every model solution to a temp directory, `javac` + `java` it, and confirm each stated output byte-for-byte, including spaces and newlines. Run each threaded program **at least 20 times** and confirm identical output. For "which outputs are POSSIBLE" questions, justify every possible option with an explicit interleaving and every impossible one with the ordering guarantee (`join`, `synchronized`, `wait`/`notify`) that rules it out. Clean up temp files afterwards. If there is no JDK, hand-trace every snippet twice independently.
 - In the HTML, escape `<`, `>` and `&`, and render code in `<pre><code>` so whitespace survives.
+- **Code-block formatting**: monospace, `white-space: pre`, `tab-size: 4`. Line numbers go in a separate **non-selectable gutter** (so Copy gives clean code), never typed into the code text. Each block has a filename caption and a Copy button. Long lines **scroll horizontally inside the block**. They are never wrapped, clipped, or allowed to spill over neighbouring content, and the page itself never scrolls sideways.
 
 ---
 
 ## STEP 6 — DIAGRAMS
 
-- **Inline SVG** only (`viewBox`, no fixed width, scales on mobile). No external images or base64.
+- **Inline SVG** only (`viewBox`, no fixed width, scales with its container). No external images or base64.
 - Use the notation exactly as the notes present it:
   - **Class diagrams**: three-compartment boxes, `+ - #` visibility, `name : type`, method signatures, hollow triangle (inheritance), dashed line with hollow triangle (interface realisation, if the notes use it), filled diamond (composition), hollow diamond (aggregation), plain line (association), dashed open arrow (dependency), multiplicities at both ends.
   - **Use case diagrams**: system boundary with name, stick-figure actors outside, ellipses inside, dashed `<<include>>` / `<<extend>>` arrows in the correct direction.
   - **Activity diagrams**: filled-circle initial node, bullseye final node, rounded action nodes, diamond decision/merge with guards, thick bar fork/join, swimlanes, exactly as in `Activity_Diagrams.md`.
-- A diagram must carry information needed for the answer, never decoration. It must stay legible at ~360 px wide, with arrowheads and diamonds clearly distinguishable.
-- Diagram strokes and text use the palette's text/ink colours (STEP 9) on the card background.
+- A diagram must carry information needed for the answer, never decoration. Its text must be at least ~12 px at desktop width, with arrowheads and diamonds clearly distinguishable. Give each SVG a `min-width` (~600 px) inside a horizontally scrollable figure, so a narrow window scrolls the diagram instead of shrinking it.
+- **No overlaps, ever.** Lay diagrams out on a grid with orthogonal (horizontal/vertical) connectors. Size every box from its longest text line, with ≥ 6 px padding, not by guesswork. Keep ≥ 6 px clearance between any label and any line, diamond, arrowhead, box edge or other label. Multiplicity, role and stereotype labels sit **beside** their line, never on top of it. Boxes never touch.
+- **Theme-aware colours**: diagram strokes, text and fills use the palette's CSS variables (`var(--text)`, `var(--card)`), never hard-coded hex, so diagrams switch with the light/dark theme (STEP 9). Hollow diamonds and triangles are filled with `var(--card)` so they stay visibly hollow in both themes.
+- **Render check**: open the app in a headless browser (Playwright/Chromium if available) at **1280 px** wide, in **both the light and the dark theme**. Screenshot every diagram and every code block, and **look at the screenshots**. Also run a script that compares the `getBBox()` of every SVG `<text>` against every other text, every line/diamond/arrowhead and its containing box, and fails on any intersection or spill. Fix and re-check until clean. No phone-width check is needed.
 
 ---
 
@@ -198,7 +201,7 @@ Rules:
 When the student submits a written answer, the app **pre-ticks rubric points automatically** using keyword/regex checks. **The student can override any tick.**
 
 - Each rubric point is `{ text, marks, auto, check }`, where `check = { all: [regex…], any: [regex…], none: [regex…], ci: true|false }`. A point passes when every `all` pattern matches, at least one `any` pattern matches (if `any` is given), and no `none` pattern matches.
-- **Preprocessing before checking**: for code answers, strip `//` and `/* */` comments so that keywords in comments don't count, and collapse runs of whitespace to a single space. Prose checks are case-insensitive (`ci: true`). Code checks are case-sensitive.
+- **Preprocessing before checking**: for code answers, strip `//` and `/* */` comments, **outside string literals**, so that keywords in comments don't count. Do **not** collapse whitespace: it would corrupt string literals such as `"  cleaning"`. Rely on `\s*`-tolerant patterns instead. Prose checks are case-insensitive (`ci: true`). Code checks are case-sensitive.
 - **Write tolerant patterns.** Allow flexible whitespace (`\s*`) and modifier order (`(public\s+)?(static\s+)?synchronized`). Use `\w+` where the student picks the name, and exact names only where the question fixes them. Structural checks should be specific enough to mean something, e.g. `wait()` *inside a `while`*: `while\s*\([^)]*\)\s*\{?[^}]*?\bwait\s*\(`.
 - Points that can't sensibly be keyword-checked (e.g. a justification's quality) are `auto: false`. They start unticked and show a hint: "Tick if your answer says the part cannot exist without the whole".
 - Show auto-ticked points with an **"auto"** badge and overridden ones with an **"edited"** badge.
@@ -211,23 +214,42 @@ When the student submits a written answer, the app **pre-ticks rubric points aut
 
 Single self-contained file: `OOAD_final_mock/index.html`. No CDN, no frameworks, no build step. Vanilla JS + CSS, and it must work offline by double-clicking.
 
-### Palette — "Ink & Paper" (use exactly these as CSS custom properties)
+### Palette — two themes, one set of CSS custom properties
+
+Both themes use the **same variable names**. Only the values change. Use exactly these values:
 
 ```
---bg:        #FAF7F0   page background (cream paper)
---card:      #FFFDF8   question cards, panels
---heading:   #7A1E2C   headings, section titles (maroon)
---primary:   #2B3A55   buttons, links, selected state (ink blue)
---border:    #E3DCCB   borders, dividers
---text:      #1F1F1F   body text
---code-bg:   #F1ECE1   code blocks and answer boxes
---code-text: #2B2B2B
---correct:   #2E7D32
---wrong:     #B3261E
---partial:   #B7791F   partial credit, missed options
+token            LIGHT "Ink & Paper"   DARK "Night Ink"    used for
+--bg             #FAF7F0               #1B1814             page background
+--card           #FFFDF8               #24201B             question cards, panels, SVG box fill
+--heading        #7A1E2C               #E39AA5             headings, section titles
+--primary        #2B3A55               #A9BCE0             buttons, links, selected state
+--border         #E3DCCB               #3A342C             borders, dividers
+--text           #1F1F1F               #ECE6DA             body text, SVG strokes and labels
+--code-bg        #F1ECE1               #2B2620             code blocks and answer boxes
+--code-text      #2B2B2B               #E8E1D3
+--correct        #2E7D32               #7CC47F             correct borders / icons
+--wrong          #B3261E               #F08A80             wrong borders / icons / text
+--partial        #B7791F               #E3B25A             partial / missed borders / icons
+--on-primary     #FFFFFF               #1B1814             text on --primary and --heading fills
+--correct-text   #276E2B               #7CC47F             "correct" text on its tint
+--partial-text   #8A5A12               #E3B25A             "partial / missed" text on its tint
+--muted          rgba(31,31,31,.68)    rgba(236,230,218,.68)  line numbers, captions, hints
+--correct-tint   #E6EEE0               #323A2B             background behind a correct option
+--wrong-tint     #F6E3DE               #45312B
+--partial-tint   #F6EDDE               #433725
+--primary-tint   #E6E6E4               #39393B             selected-option background
 ```
 
-Derive tints only from these (e.g. a 10–12 % tint of `--correct` behind a correct option). Text drawn in a state colour must reach **4.5:1** contrast on its background, so darken the shade (same hue) where needed, e.g. for `--partial`. Light theme only. Typography: question stems in a **serif** stack (`"Iowan Old Style", "Palatino Linotype", Georgia, serif`) for the printed-paper feel. UI chrome in the system sans stack. Code in `ui-monospace, Consolas, "Courier New", monospace`.
+Every text/background pair above has been checked at **≥ 4.5:1** in both themes. Don't introduce other colours. If a new pair is needed, derive it from these and check its contrast with a WCAG luminance script.
+
+**How the theme works:**
+- Light tokens go on `:root` with `color-scheme: light`. Dark tokens go under `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { … } }` **and again** under `:root[data-theme="dark"] { … }`, each with `color-scheme: dark` so checkboxes, scrollbars and textareas match.
+- **Default: follow the device setting.** A ☀/☾ toggle button in the header sets `data-theme="light"|"dark"` on `<html>` and saves the choice in `localStorage` (key `ooad-theme`, inside `try/catch`). The label shows the theme it switches *to*.
+- A tiny inline `<script>` in `<head>`, before the stylesheet, applies the saved choice **before first paint**, so the page never flashes the wrong theme.
+- **No hard-coded colours anywhere** outside the two token blocks: no `#fff` on buttons, badges or tags (use `--on-primary`), and no hex in SVG.
+
+Typography: question stems in a **serif** stack (`"Iowan Old Style", "Palatino Linotype", Georgia, serif`) for the printed-paper feel. UI chrome in the system sans stack. Code in `ui-monospace, Consolas, "Courier New", monospace`.
 
 ### Data model
 
@@ -253,7 +275,7 @@ Question data lives in a JS array at the top of the file:
 - **Results screen**: total /100 and %, per-section scores (/30, /30, /40), per-topic breakdown, best-answer vs multi-answer accuracy, total marks lost to negative marking, time used and overtime. Then a **list of missed questions** (wrong *and* partial) with jump-back links, a **"Retry missed only"** button (resets just those questions in practice mode and keeps the original attempt's score on record), and a best-score record.
 - **Save progress**: `localStorage` with a versioned key stores answers, submitted state, rubric overrides, flags, mode, option-shuffle seed (so option order survives refresh), timer start, current question, and best score. A **Reset attempt** button asks for confirmation. Wrap every storage call in `try/catch` so the app still works with storage blocked.
 - **Keyboard**: `1`–`5` toggle options, `Enter` submits, `←`/`→` navigate, `F` flags. All are disabled while typing in a textarea.
-- **Mobile-first**: works at 360 px, tap targets ≥ 44 px, visible focus rings, code blocks and wide SVGs scroll horizontally instead of overflowing, generous line height.
+- **Desktop layout**: designed for a laptop/desktop browser (≥ 1024 px). No phone layout or phone testing is needed. Use a centred column (~900 px max), visible focus rings and generous line height. Code blocks and wide SVGs scroll horizontally inside their own box instead of overflowing.
 
 ---
 
@@ -261,7 +283,7 @@ Question data lives in a JS array at the top of the file:
 
 The exam allows **one A4 double-sided reference sheet**. Produce `OOAD_final_mock/reference-sheet.html`, a printable sheet that fits **exactly two A4 pages** (`@page { size: A4; margin: 10mm; }`), built **only from the lecture notes**, with no rules the notes don't contain.
 
-- Dense multi-column layout, minimum font size 7.5 pt, clear section headings in `--heading` maroon. When printed: white background, near-black text, readable in greyscale.
+- Dense multi-column layout, minimum font size 7.5 pt, clear section headings in `--heading`. On screen it follows the same light/dark theme setting as the app. **When printed it always uses the light palette** (`@media print` forces the light tokens): white background, near-black text, readable in greyscale.
 - Prioritise what is **hard to memorise and likely to be tested**: the exception hierarchy and checked/unchecked list; try/catch/`finally`/multi-catch rules; thread lifecycle states and what each method does to the lock (`wait`/`notify`/`notifyAll`/`sleep`/`join`/`yield`); synchronized method vs block; a `wait()`-in-`while` template; the collections hierarchy with a "which class for which need" table (ordering, duplicates, nulls, key lookup) and key methods; generics syntax (class, method, bounded, multiple bounds, wildcards, limitations); compact skeletons of Singleton (all variants from the notes), Abstract Factory, Command (roles, `NoCommand`, undo, macro) and Bridge; the UML relationship notation table; `<<include>>` vs `<<extend>>`; activity-diagram symbols; FR vs NFR; the five noun rejection rules; the CRC card layout.
 - It must be a **general** sheet. It must not contain answers to this mock's specific questions.
 - If a headless browser is available (e.g. Chromium/Playwright), print it to PDF and confirm it is exactly 2 pages. Fix overflow by tightening content, not by shrinking fonts below 7.5 pt.
@@ -277,6 +299,8 @@ Do **not** write an audit or report file. Silently make sure that:
 - Every Java snippet and model solution compiles and produces exactly the stated output (threads: 20 identical runs).
 - `index.html?selftest=1` reports zero failures.
 - `index.html` loads with no console errors (use a headless browser if available), and every SVG renders.
+- The STEP 6 render check passes at 1280 px in **both themes**: no SVG text overlaps, every label clears lines and diamonds, every code block scrolls inside itself, and the page has no horizontal scroll.
+- Theme switching works: it follows the device by default, the toggle overrides it and survives a reload, there's no flash of the wrong theme on load, and no hard-coded colour exists outside the two token blocks.
 - The reference sheet is exactly 2 A4 pages.
 
 Fix anything that fails. Then reply with a summary of **≤ 10 lines**: what was generated, the Section 3 scenarios and pattern pair, and anything you had to compromise on.
