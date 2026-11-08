@@ -1,0 +1,1137 @@
+{
+ "module": "SE2022 Design and Analysis of Algorithms",
+ "lecturer_model": "see LECTURER_PROFILE.md in the same folder",
+ "sources": {
+  "T1": {
+   "file": "DAA Model Paper Test 01 (1).pdf",
+   "title": "SE2022 Test 01 Model Paper, Y2S2 2024 (1 h, 2 x 10 marks)",
+   "kind": "test"
+  },
+  "FM": {
+   "file": "Final Exam Paper Model Paper (1).pdf",
+   "title": "SE2022 Final Examination Model Paper (2 h; section totals 10/10/14/11/12/20 as printed)",
+   "kind": "final-model"
+  },
+  "WB": {
+   "file": "DaaExact.jpeg",
+   "title": "Lecturer's whiteboard: 'this will be kind of the model coming for the paper'",
+   "kind": "lecturer-hint"
+  }
+ },
+ "announced_final_format": {
+  "duration": "2 hours",
+  "questions": [
+   {
+    "q": "Q1",
+    "marks": 15,
+    "title": "Recursion and Algorithm Design",
+    "lectures": [
+     "L01",
+     "L02",
+     "L03",
+     "L04",
+     "L05"
+    ]
+   },
+   {
+    "q": "Q2",
+    "marks": 15,
+    "title": "Dynamic Programming (0/1 knapsack, matrix-chain multiplication)",
+    "lectures": [
+     "L09"
+    ]
+   },
+   {
+    "q": "Q3",
+    "marks": 15,
+    "title": "String Matching Algorithms",
+    "lectures": [
+     "L06"
+    ]
+   },
+   {
+    "q": "Q4",
+    "marks": 15,
+    "title": "Data Compression Algorithms and Greedy Algorithms",
+    "lectures": [
+     "L08",
+     "L07"
+    ]
+   }
+  ]
+ },
+ "fields": [
+  "id",
+  "source",
+  "question",
+  "part",
+  "marks",
+  "lecture",
+  "final_q",
+  "topic",
+  "skill",
+  "archetype",
+  "trap",
+  "given",
+  "text",
+  "answer",
+  "repeats",
+  "note"
+ ],
+ "summary": {
+  "records": 46,
+  "by_source": {
+   "T1": 13,
+   "FM": 31,
+   "WB": 2
+  },
+  "by_lecture": {
+   "L01": 6,
+   "L02": 6,
+   "L03": 6,
+   "L04": 8,
+   "L05": 5,
+   "L08": 5,
+   "L09": 7,
+   "none": 3
+  },
+  "by_final_q": {
+   "Q1": 31,
+   "None": 3,
+   "Q4": 5,
+   "Q2": 7
+  },
+  "by_archetype": {
+   "D1-illustrate-given-algorithm": 8,
+   "D10-choose-and-justify": 2,
+   "D11-warm-up-recall": 8,
+   "D2-dp-table-from-given-recurrence": 4,
+   "D3-model-recursive-definition": 8,
+   "D4-solve-recurrence": 2,
+   "D5-best-worst-case": 4,
+   "D6-asymptotic-order": 2,
+   "D7-ram-step-count": 2,
+   "D8-verify-or-prove-property": 2,
+   "D9-read-off-own-construction": 4
+  },
+  "by_skill": {
+   "trace": 8,
+   "explain": 7,
+   "write-recurrence": 4,
+   "fill-table": 4,
+   "define": 3,
+   "recall": 2,
+   "count": 2,
+   "justify-order": 2,
+   "model-recursion": 2,
+   "write-pseudocode": 2,
+   "solve-recurrence": 2,
+   "justify-choice": 2,
+   "prove": 1,
+   "verify": 1,
+   "draw": 1,
+   "compare": 1,
+   "compute": 1,
+   "read-off": 1
+  },
+  "fm_marks_by_lecture": {
+   "L01": 7,
+   "L02": 7,
+   "L03": 6,
+   "L04": 10,
+   "L05": 12,
+   "L08": 12,
+   "L09": 20,
+   "none": 10
+  },
+  "traps": 13,
+  "fm_marks_total": 84
+ },
+ "questions": [
+  {
+   "id": "T1-Q1.1",
+   "source": "T1",
+   "question": "Q1",
+   "part": "1",
+   "marks": 2,
+   "lecture": "L01",
+   "final_q": "Q1",
+   "topic": "Properties of a good algorithm",
+   "skill": "recall",
+   "archetype": "D11-warm-up-recall",
+   "trap": null,
+   "given": null,
+   "text": "List two properties of good algorithm.",
+   "answer": "Any two of the lecture's list: be correct; be unambiguous; give the correct solution for all cases; be simple; must terminate.",
+   "repeats": [
+    "FM-Q1.1"
+   ],
+   "note": "Flaw: T1 heads Question One '(10 Marks)' but its printed part marks add to 20 (and the paper total is 20)."
+  },
+  {
+   "id": "T1-Q1.2",
+   "source": "T1",
+   "question": "Q1",
+   "part": "2",
+   "marks": 2,
+   "lecture": "L01",
+   "final_q": "Q1",
+   "topic": "Purpose of analysis",
+   "skill": "explain",
+   "archetype": "D11-warm-up-recall",
+   "trap": null,
+   "given": null,
+   "text": "What is the main purpose of analysis of algorithms?",
+   "answer": "To predict resource usage (mainly running time, also memory) as the input grows, so algorithms can be compared and their growth of run time predicted independently of hardware.",
+   "repeats": [
+    "FM-Q1.2"
+   ],
+   "note": null
+  },
+  {
+   "id": "T1-Q1.3",
+   "source": "T1",
+   "question": "Q1",
+   "part": "3",
+   "marks": 3,
+   "lecture": "L01",
+   "final_q": "Q1",
+   "topic": "RAM-model step count",
+   "skill": "count",
+   "archetype": "D7-ram-step-count",
+   "trap": "j is set to 0 once, outside the for loop, so the while body runs only while i = 0 (6 times in total); later iterations do one failing test. Students who multiply 6 by (n+1) get the wrong count; the order is still linear.",
+   "given": null,
+   "text": "Analyze the running time of the following program fragment assuming a RAM model of computation.\n  j <- 0\n  for i <- 0 to n\n     while j <= 5\n        j <- j + 1",
+   "answer": "With the slide-23 convention (1 step per assignment/comparison/addition; 'for i <- 0 to n' costs (n+2) assignments, (n+2) comparisons, (n+1) additions): j<-0 = 1; for control = 3n+5; while tests = 7 (when i = 0) + n (once per later i) = n+7; body runs 6 times in total = 12. T(n) = 4n + 25 = O(n).",
+   "repeats": [
+    "FM-Q1.3"
+   ],
+   "note": "Lecture slides 24 and 25 show both versions (j reset inside the loop vs outside): the lecturer tests whether students notice where the initialisation sits."
+  },
+  {
+   "id": "T1-Q1.4",
+   "source": "T1",
+   "question": "Q1",
+   "part": "4",
+   "marks": 2,
+   "lecture": "L02",
+   "final_q": "Q1",
+   "topic": "Insertion sort best/worst case",
+   "skill": "explain",
+   "archetype": "D5-best-worst-case",
+   "trap": null,
+   "given": null,
+   "text": "What are the best case and worst case running time (in Big O notation) of the insertion sorting algorithm? When do you get such situations?",
+   "answer": "Best case O(n): input already sorted (the while test fails at once for every j). Worst case O(n^2): input in reverse order (every key is shifted past all earlier elements).",
+   "repeats": [
+    "FM-Q1.4"
+   ],
+   "note": null
+  },
+  {
+   "id": "T1-Q1.5",
+   "source": "T1",
+   "question": "Q1",
+   "part": "5",
+   "marks": 3,
+   "lecture": "L02",
+   "final_q": "Q1",
+   "topic": "Insertion sort trace",
+   "skill": "trace",
+   "archetype": "D1-illustrate-given-algorithm",
+   "trap": null,
+   "given": {
+    "A": [
+     10,
+     0,
+     8,
+     4
+    ],
+    "algorithm": "INSERTION-SORT (lecture, 1-based)"
+   },
+   "text": "Illustrate the operations of the Insertion sort algorithm for A = [10, 0, 8, 4] (assign the values only once to the given algorithm codes, then use a diagrammatic way). INSERTION-SORT pseudo-code is printed with the question.",
+   "answer": "j=2, key=0, shifts=1 -> [0, 10, 8, 4]; j=3, key=8, shifts=1 -> [0, 8, 10, 4]; j=4, key=4, shifts=2 -> [0, 4, 8, 10]",
+   "repeats": [
+    "FM-Q1.5"
+   ],
+   "note": null
+  },
+  {
+   "id": "T1-Q1.6",
+   "source": "T1",
+   "question": "Q1",
+   "part": "6",
+   "marks": 2,
+   "lecture": "L02",
+   "final_q": "Q1",
+   "topic": "Big-O of a sum of terms",
+   "skill": "justify-order",
+   "archetype": "D6-asymptotic-order",
+   "trap": "(b) Students pick n^20 because of the big coefficient, or 2^n because it is the first exponential they see.",
+   "given": null,
+   "text": "Find the Big oh value for (a) T(n) = log n + n + 100, (b) T(n) = 200n^20 + 100n^10 + 2^n + 3^n + n + 1. Justify your answer.",
+   "answer": "(a) O(n): n dominates log n and the constant (T(n) <= 3n for n >= 100). (b) O(3^n): 3^n grows faster than 2^n and any polynomial; coefficients 200, 100 are irrelevant (T(n)/3^n -> 1).",
+   "repeats": [
+    "FM-Q1.6"
+   ],
+   "note": null
+  },
+  {
+   "id": "T1-Q1.7a",
+   "source": "T1",
+   "question": "Q1",
+   "part": "7a",
+   "marks": 6,
+   "lecture": "L03",
+   "final_q": "Q1",
+   "topic": "Recursive relation with initial condition",
+   "skill": "model-recursion",
+   "archetype": "D3-model-recursive-definition",
+   "trap": null,
+   "given": null,
+   "text": "pow(x, n) = x^n = x * x^(n-1). Write a recursive relation for pow(x, n) (n non-negative integer). Clearly define the initial condition(s).",
+   "answer": "pow(x, n) = 1 if n = 0 (initial condition); pow(x, n) = x * pow(x, n-1) if n > 0.",
+   "repeats": [
+    "FM-Q1.7a"
+   ],
+   "note": "7a-7c share one printed total of 6 marks (stored on 7a)."
+  },
+  {
+   "id": "T1-Q1.7b",
+   "source": "T1",
+   "question": "Q1",
+   "part": "7b",
+   "marks": null,
+   "lecture": "L03",
+   "final_q": "Q1",
+   "topic": "Recursive pseudo-code",
+   "skill": "write-pseudocode",
+   "archetype": "D3-model-recursive-definition",
+   "trap": null,
+   "given": null,
+   "text": "Write a recursive algorithm in pseudo code for the above recursive relation.",
+   "answer": "POW(x, n)\n1 if n = 0\n2    then return 1\n3    else return x * POW(x, n - 1)",
+   "repeats": [
+    "FM-Q1.7b"
+   ],
+   "note": null
+  },
+  {
+   "id": "T1-Q1.7c",
+   "source": "T1",
+   "question": "Q1",
+   "part": "7c",
+   "marks": null,
+   "lecture": "L03",
+   "final_q": "Q1",
+   "topic": "Recurrence for running time",
+   "skill": "write-recurrence",
+   "archetype": "D3-model-recursive-definition",
+   "trap": null,
+   "given": null,
+   "text": "Write a recurrence equation that describes the running time T(n) of the part (b) algorithm.",
+   "answer": "T(0) = c1; T(n) = T(n-1) + c2 for n > 0 (one test, one multiplication, one return per call). Solving by repeated substitution: T(n) = c1 + n*c2 = O(n).",
+   "repeats": [
+    "FM-Q1.7c"
+   ],
+   "note": null
+  },
+  {
+   "id": "T1-Q2.a",
+   "source": "T1",
+   "question": "Q2",
+   "part": "a",
+   "marks": 3,
+   "lecture": "L04",
+   "final_q": "Q1",
+   "topic": "Quicksort with Lomuto partition trace",
+   "skill": "trace",
+   "archetype": "D1-illustrate-given-algorithm",
+   "trap": "The pivot is the LAST element (8), not the first; indices are 1-based. Sub-arrays of size 1 or 0 make no PARTITION call.",
+   "given": {
+    "A": [
+     28,
+     15,
+     1,
+     30,
+     0,
+     8
+    ],
+    "partition": "Lomuto, pivot = A[r]"
+   },
+   "text": "QUICKSORT / PARTITION (x <- A[r]) are given. Illustrate the operations of QUICKSORT(A, p, r) for A = [28, 15, 1, 30, 0, 8].",
+   "answer": "PARTITION(A,1,6) pivot 8 -> q=3, A=[1, 0, 8, 30, 15, 28] | PARTITION(A,1,2) pivot 0 -> q=1, A=[0, 1, 8, 30, 15, 28] | PARTITION(A,4,6) pivot 28 -> q=5, A=[0, 1, 8, 15, 28, 30] | sorted [0, 1, 8, 15, 28, 30]",
+   "repeats": [
+    "FM-Q2.a"
+   ],
+   "note": null
+  },
+  {
+   "id": "T1-Q2.b",
+   "source": "T1",
+   "question": "Q2",
+   "part": "b",
+   "marks": 2,
+   "lecture": "L04",
+   "final_q": "Q1",
+   "topic": "Quicksort best/worst partitioning",
+   "skill": "explain",
+   "archetype": "D5-best-worst-case",
+   "trap": null,
+   "given": null,
+   "text": "What kinds of partitioning generate the best or worst case of quicksort?",
+   "answer": "Best: every PARTITION splits the array into two halves of (about) n/2 each -> O(n lg n). Worst: every split is 0 and n-1 elements (e.g. already sorted input with pivot = A[r]) -> O(n^2).",
+   "repeats": [
+    "FM-Q2.b"
+   ],
+   "note": null
+  },
+  {
+   "id": "T1-Q2.c",
+   "source": "T1",
+   "question": "Q2",
+   "part": "c",
+   "marks": null,
+   "lecture": "L04",
+   "final_q": "Q1",
+   "topic": "Best-case recurrence",
+   "skill": "write-recurrence",
+   "archetype": "D3-model-recursive-definition",
+   "trap": null,
+   "given": null,
+   "text": "Write recurrence equations for the best case.",
+   "answer": "T(1) = c; T(n) = 2T(n/2) + cn for n > 1 (two half-size calls plus linear PARTITION).",
+   "repeats": [
+    "FM-Q2.c"
+   ],
+   "note": "c and d share one printed total of 5 marks (stored on d)."
+  },
+  {
+   "id": "T1-Q2.d",
+   "source": "T1",
+   "question": "Q2",
+   "part": "d",
+   "marks": 5,
+   "lecture": "L04",
+   "final_q": "Q1",
+   "topic": "Repeated substitution",
+   "skill": "solve-recurrence",
+   "archetype": "D4-solve-recurrence",
+   "trap": null,
+   "given": null,
+   "text": "Use the repeated substitution method to solve the best case recurrence equation.",
+   "answer": "T(n) = 2T(n/2) + cn = 4T(n/4) + 2cn = 8T(n/8) + 3cn = ... = 2^k T(n/2^k) + k*cn. Put n = 2^k (k = lg n): T(n) = nT(1) + cn lg n = cn + cn lg n = O(n lg n).",
+   "repeats": [
+    "FM-Q2.d"
+   ],
+   "note": null
+  },
+  {
+   "id": "FM-Q1.1",
+   "source": "FM",
+   "question": "Q1",
+   "part": "1",
+   "marks": 2,
+   "lecture": "L01",
+   "final_q": "Q1",
+   "topic": "Properties of a good algorithm",
+   "skill": "recall",
+   "archetype": "D11-warm-up-recall",
+   "trap": null,
+   "given": null,
+   "text": "List two properties of good algorithm.",
+   "answer": "Any two of the lecture's list: be correct; be unambiguous; give the correct solution for all cases; be simple; must terminate.",
+   "repeats": [
+    "T1-Q1.1"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper. Flaw: T1 heads Question One '(10 Marks)' but its printed part marks add to 20 (and the paper total is 20)."
+  },
+  {
+   "id": "FM-Q1.2",
+   "source": "FM",
+   "question": "Q1",
+   "part": "2",
+   "marks": 2,
+   "lecture": "L01",
+   "final_q": "Q1",
+   "topic": "Purpose of analysis",
+   "skill": "explain",
+   "archetype": "D11-warm-up-recall",
+   "trap": null,
+   "given": null,
+   "text": "What is the main purpose of analysis of algorithms?",
+   "answer": "To predict resource usage (mainly running time, also memory) as the input grows, so algorithms can be compared and their growth of run time predicted independently of hardware.",
+   "repeats": [
+    "T1-Q1.2"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q1.3",
+   "source": "FM",
+   "question": "Q1",
+   "part": "3",
+   "marks": 3,
+   "lecture": "L01",
+   "final_q": "Q1",
+   "topic": "RAM-model step count",
+   "skill": "count",
+   "archetype": "D7-ram-step-count",
+   "trap": "j is set to 0 once, outside the for loop, so the while body runs only while i = 0 (6 times in total); later iterations do one failing test. Students who multiply 6 by (n+1) get the wrong count; the order is still linear.",
+   "given": null,
+   "text": "Analyze the running time of the following program fragment assuming a RAM model of computation.\n  j <- 0\n  for i <- 0 to n\n     while j <= 5\n        j <- j + 1",
+   "answer": "With the slide-23 convention (1 step per assignment/comparison/addition; 'for i <- 0 to n' costs (n+2) assignments, (n+2) comparisons, (n+1) additions): j<-0 = 1; for control = 3n+5; while tests = 7 (when i = 0) + n (once per later i) = n+7; body runs 6 times in total = 12. T(n) = 4n + 25 = O(n).",
+   "repeats": [
+    "T1-Q1.3"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper. Lecture slides 24 and 25 show both versions (j reset inside the loop vs outside): the lecturer tests whether students notice where the initialisation sits."
+  },
+  {
+   "id": "FM-Q1.4",
+   "source": "FM",
+   "question": "Q1",
+   "part": "4",
+   "marks": 2,
+   "lecture": "L02",
+   "final_q": "Q1",
+   "topic": "Insertion sort best/worst case",
+   "skill": "explain",
+   "archetype": "D5-best-worst-case",
+   "trap": null,
+   "given": null,
+   "text": "What are the best case and worst case running time (in Big O notation) of the insertion sorting algorithm? When do you get such situations?",
+   "answer": "Best case O(n): input already sorted (the while test fails at once for every j). Worst case O(n^2): input in reverse order (every key is shifted past all earlier elements).",
+   "repeats": [
+    "T1-Q1.4"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q1.5",
+   "source": "FM",
+   "question": "Q1",
+   "part": "5",
+   "marks": 3,
+   "lecture": "L02",
+   "final_q": "Q1",
+   "topic": "Insertion sort trace",
+   "skill": "trace",
+   "archetype": "D1-illustrate-given-algorithm",
+   "trap": null,
+   "given": {
+    "A": [
+     10,
+     0,
+     8,
+     4
+    ],
+    "algorithm": "INSERTION-SORT (lecture, 1-based)"
+   },
+   "text": "Illustrate the operations of the Insertion sort algorithm for A = [10, 0, 8, 4] (assign the values only once to the given algorithm codes, then use a diagrammatic way). INSERTION-SORT pseudo-code is printed with the question.",
+   "answer": "j=2, key=0, shifts=1 -> [0, 10, 8, 4]; j=3, key=8, shifts=1 -> [0, 8, 10, 4]; j=4, key=4, shifts=2 -> [0, 4, 8, 10]",
+   "repeats": [
+    "T1-Q1.5"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q1.6",
+   "source": "FM",
+   "question": "Q1",
+   "part": "6",
+   "marks": 2,
+   "lecture": "L02",
+   "final_q": "Q1",
+   "topic": "Big-O of a sum of terms",
+   "skill": "justify-order",
+   "archetype": "D6-asymptotic-order",
+   "trap": "(b) Students pick n^20 because of the big coefficient, or 2^n because it is the first exponential they see.",
+   "given": null,
+   "text": "Find the Big oh value for (a) T(n) = log n + n + 100, (b) T(n) = 200n^20 + 100n^10 + 2^n + 3^n + n + 1. Justify your answer.",
+   "answer": "(a) O(n): n dominates log n and the constant (T(n) <= 3n for n >= 100). (b) O(3^n): 3^n grows faster than 2^n and any polynomial; coefficients 200, 100 are irrelevant (T(n)/3^n -> 1).",
+   "repeats": [
+    "T1-Q1.6"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q1.7a",
+   "source": "FM",
+   "question": "Q1",
+   "part": "7a",
+   "marks": 6,
+   "lecture": "L03",
+   "final_q": "Q1",
+   "topic": "Recursive relation with initial condition",
+   "skill": "model-recursion",
+   "archetype": "D3-model-recursive-definition",
+   "trap": null,
+   "given": null,
+   "text": "pow(x, n) = x^n = x * x^(n-1). Write a recursive relation for pow(x, n) (n non-negative integer). Clearly define the initial condition(s).",
+   "answer": "pow(x, n) = 1 if n = 0 (initial condition); pow(x, n) = x * pow(x, n-1) if n > 0.",
+   "repeats": [
+    "T1-Q1.7a"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper. 7a-7c share one printed total of 6 marks (stored on 7a)."
+  },
+  {
+   "id": "FM-Q1.7b",
+   "source": "FM",
+   "question": "Q1",
+   "part": "7b",
+   "marks": null,
+   "lecture": "L03",
+   "final_q": "Q1",
+   "topic": "Recursive pseudo-code",
+   "skill": "write-pseudocode",
+   "archetype": "D3-model-recursive-definition",
+   "trap": null,
+   "given": null,
+   "text": "Write a recursive algorithm in pseudo code for the above recursive relation.",
+   "answer": "POW(x, n)\n1 if n = 0\n2    then return 1\n3    else return x * POW(x, n - 1)",
+   "repeats": [
+    "T1-Q1.7b"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q1.7c",
+   "source": "FM",
+   "question": "Q1",
+   "part": "7c",
+   "marks": null,
+   "lecture": "L03",
+   "final_q": "Q1",
+   "topic": "Recurrence for running time",
+   "skill": "write-recurrence",
+   "archetype": "D3-model-recursive-definition",
+   "trap": null,
+   "given": null,
+   "text": "Write a recurrence equation that describes the running time T(n) of the part (b) algorithm.",
+   "answer": "T(0) = c1; T(n) = T(n-1) + c2 for n > 0 (one test, one multiplication, one return per call). Solving by repeated substitution: T(n) = c1 + n*c2 = O(n).",
+   "repeats": [
+    "T1-Q1.7c"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q2.a",
+   "source": "FM",
+   "question": "Q2",
+   "part": "a",
+   "marks": 3,
+   "lecture": "L04",
+   "final_q": "Q1",
+   "topic": "Quicksort with Lomuto partition trace",
+   "skill": "trace",
+   "archetype": "D1-illustrate-given-algorithm",
+   "trap": "The pivot is the LAST element (8), not the first; indices are 1-based. Sub-arrays of size 1 or 0 make no PARTITION call.",
+   "given": {
+    "A": [
+     28,
+     15,
+     1,
+     30,
+     0,
+     8
+    ],
+    "partition": "Lomuto, pivot = A[r]"
+   },
+   "text": "QUICKSORT / PARTITION (x <- A[r]) are given. Illustrate the operations of QUICKSORT(A, p, r) for A = [28, 15, 1, 30, 0, 8].",
+   "answer": "PARTITION(A,1,6) pivot 8 -> q=3, A=[1, 0, 8, 30, 15, 28] | PARTITION(A,1,2) pivot 0 -> q=1, A=[0, 1, 8, 30, 15, 28] | PARTITION(A,4,6) pivot 28 -> q=5, A=[0, 1, 8, 15, 28, 30] | sorted [0, 1, 8, 15, 28, 30]",
+   "repeats": [
+    "T1-Q2.a"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q2.b",
+   "source": "FM",
+   "question": "Q2",
+   "part": "b",
+   "marks": 2,
+   "lecture": "L04",
+   "final_q": "Q1",
+   "topic": "Quicksort best/worst partitioning",
+   "skill": "explain",
+   "archetype": "D5-best-worst-case",
+   "trap": null,
+   "given": null,
+   "text": "What kinds of partitioning generate the best or worst case of quicksort?",
+   "answer": "Best: every PARTITION splits the array into two halves of (about) n/2 each -> O(n lg n). Worst: every split is 0 and n-1 elements (e.g. already sorted input with pivot = A[r]) -> O(n^2).",
+   "repeats": [
+    "T1-Q2.b"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q2.c",
+   "source": "FM",
+   "question": "Q2",
+   "part": "c",
+   "marks": null,
+   "lecture": "L04",
+   "final_q": "Q1",
+   "topic": "Best-case recurrence",
+   "skill": "write-recurrence",
+   "archetype": "D3-model-recursive-definition",
+   "trap": null,
+   "given": null,
+   "text": "Write recurrence equations for the best case.",
+   "answer": "T(1) = c; T(n) = 2T(n/2) + cn for n > 1 (two half-size calls plus linear PARTITION).",
+   "repeats": [
+    "T1-Q2.c"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper. c and d share one printed total of 5 marks (stored on d)."
+  },
+  {
+   "id": "FM-Q2.d",
+   "source": "FM",
+   "question": "Q2",
+   "part": "d",
+   "marks": 5,
+   "lecture": "L04",
+   "final_q": "Q1",
+   "topic": "Repeated substitution",
+   "skill": "solve-recurrence",
+   "archetype": "D4-solve-recurrence",
+   "trap": null,
+   "given": null,
+   "text": "Use the repeated substitution method to solve the best case recurrence equation.",
+   "answer": "T(n) = 2T(n/2) + cn = 4T(n/4) + 2cn = 8T(n/8) + 3cn = ... = 2^k T(n/2^k) + k*cn. Put n = 2^k (k = lg n): T(n) = nT(1) + cn lg n = cn + cn lg n = O(n lg n).",
+   "repeats": [
+    "T1-Q2.d"
+   ],
+   "note": "Verbatim repeat of the Test 01 model paper."
+  },
+  {
+   "id": "FM-Q3.1",
+   "source": "FM",
+   "question": "Q3",
+   "part": "1",
+   "marks": 2,
+   "lecture": "L05",
+   "final_q": "Q1",
+   "topic": "Tree terminology",
+   "skill": "define",
+   "archetype": "D11-warm-up-recall",
+   "trap": null,
+   "given": null,
+   "text": "Briefly describe (a) leaf node, (b) binary tree.",
+   "answer": "(a) A node with no children. (b) A tree in which every node has at most two children (left and right).",
+   "repeats": [],
+   "note": "Question three is printed twice in the paper (once as 'Question One' with items 7-12)."
+  },
+  {
+   "id": "FM-Q3.2",
+   "source": "FM",
+   "question": "Q3",
+   "part": "2",
+   "marks": 2,
+   "lecture": "L05",
+   "final_q": "Q1",
+   "topic": "Full binary tree node count",
+   "skill": "prove",
+   "archetype": "D8-verify-or-prove-property",
+   "trap": null,
+   "given": null,
+   "text": "Prove that for a full binary tree with n nodes and height h, n + 1 = 2^(h+1).",
+   "answer": "A full binary tree has 2^i nodes on level i (i = 0..h). n = sum_{i=0..h} 2^i = 2^(h+1) - 1 (geometric series), so n + 1 = 2^(h+1).",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-Q3.3",
+   "source": "FM",
+   "question": "Q3",
+   "part": "3",
+   "marks": 6,
+   "lecture": "L05",
+   "final_q": "Q1",
+   "topic": "Heapsort trace",
+   "skill": "trace",
+   "archetype": "D1-illustrate-given-algorithm",
+   "trap": "BUILD_HEAP starts at i = floor(n/2) = 4 and goes DOWN to 1; it is not 8 successive insertions. After each exchange heap_size shrinks, so sorted tail elements are never compared again.",
+   "given": {
+    "A": [
+     45,
+     25,
+     15,
+     85,
+     75,
+     65,
+     35,
+     55
+    ]
+   },
+   "text": "Illustrate the operations of Heap sort for A = [45, 25, 15, 85, 75, 65, 35, 55] (algorithms HEAPSORT, BUILD_HEAP, HEAPIFY at the end of the paper).",
+   "answer": "BUILD_HEAP (i = 4..1): [45, 25, 15, 85, 75, 65, 35, 55] -> [45, 25, 65, 85, 75, 15, 35, 55] -> [45, 85, 65, 55, 75, 15, 35, 25] -> [85, 75, 65, 55, 45, 15, 35, 25]; heap = [85, 75, 65, 55, 45, 15, 35, 25]. Extraction: i=8: [75, 55, 65, 25, 45, 15, 35, 85] -> i=7: [65, 55, 35, 25, 45, 15, 75, 85] -> i=6: [55, 45, 35, 25, 15, 65, 75, 85] -> i=5: [45, 25, 35, 15, 55, 65, 75, 85] -> i=4: [35, 25, 15, 45, 55, 65, 75, 85] -> i=3: [25, 15, 35, 45, 55, 65, 75, 85] -> i=2: [15, 25, 35, 45, 55, 65, 75, 85]",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-Q3.4",
+   "source": "FM",
+   "question": "Q3",
+   "part": "4",
+   "marks": 2,
+   "lecture": "L05",
+   "final_q": "Q1",
+   "topic": "Max-heap check",
+   "skill": "verify",
+   "archetype": "D8-verify-or-prove-property",
+   "trap": "The top three levels look perfect; the single violation is at the bottom (index 4 vs 9). Students who only check the root say 'yes'.",
+   "given": null,
+   "text": "Is <23, 17, 14, 6, 13, 10, 1, 5, 7, 12> a max heap? Justify your answer.",
+   "answer": "No. A[4] = 6 has right child A[9] = 7 > 6, violating A[parent(i)] >= A[i]. Every other parent-child pair satisfies the property.",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-Q3.5-6",
+   "source": "FM",
+   "question": "Q3",
+   "part": "5-6",
+   "marks": null,
+   "lecture": "L05",
+   "final_q": "Q1",
+   "topic": "Priority queue heap type",
+   "skill": "justify-choice",
+   "archetype": "D10-choose-and-justify",
+   "trap": "Students associate 'priority 1 = first' and answer min-heap; the stem says high number = high priority.",
+   "given": null,
+   "text": "CPU scheduling uses a priority queue where a higher number means higher priority. What type of heap should implement it?",
+   "answer": "A max-heap: the highest-priority (largest number) process is always at the root, so EXTRACT-MAX gives the next process in O(lg n).",
+   "repeats": [],
+   "note": "Marks not printed; the statement and the question are split across items 5 and 6."
+  },
+  {
+   "id": "FM-Q4.1",
+   "source": "FM",
+   "question": "Q4",
+   "part": "1",
+   "marks": 1,
+   "lecture": "none",
+   "final_q": null,
+   "topic": "Draw a directed graph from (V, E)",
+   "skill": "draw",
+   "archetype": "D11-warm-up-recall",
+   "trap": null,
+   "given": null,
+   "text": "Draw the directed graph with V = {1,2,3,4,5}, E = {(1,2),(2,3),(3,4),(3,5),(5,4),(3,2)}.",
+   "answer": "Arrows 1->2, 2->3, 3->2 (a 2-cycle between 2 and 3), 3->4, 3->5, 5->4.",
+   "repeats": [],
+   "note": "Graph representation/DFS is not in the nine lecture decks; graph vocabulary is reused in L07 (spanning trees)."
+  },
+  {
+   "id": "FM-Q4.2",
+   "source": "FM",
+   "question": "Q4",
+   "part": "2",
+   "marks": 3,
+   "lecture": "none",
+   "final_q": null,
+   "topic": "Graph representations",
+   "skill": "compare",
+   "archetype": "D10-choose-and-justify",
+   "trap": null,
+   "given": null,
+   "text": "Briefly explain the two methods to represent a graph. Which suits a sparse graph? Justify.",
+   "answer": "Adjacency matrix: |V| x |V| array, entry 1 (or the weight) if (u,v) in E; Theta(V^2) space. Adjacency list: an array of |V| lists holding each vertex's neighbours; Theta(V + E) space. Sparse graph (|E| much less than |V|^2): adjacency list, because it stores only existing edges.",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-Q4.3",
+   "source": "FM",
+   "question": "Q4",
+   "part": "3",
+   "marks": 6,
+   "lecture": "none",
+   "final_q": null,
+   "topic": "DFS trace",
+   "skill": "trace",
+   "archetype": "D1-illustrate-given-algorithm",
+   "trap": null,
+   "given": null,
+   "text": "Illustrate DFS on the given graph (edges a-b, a-e, e-f, b-c, b-d) starting at a, using DFS/DFS-VISIT from the end of the paper.",
+   "answer": "With alphabetical adjacency lists: a 1/12, b 2/7, c 3/4, d 5/6, e 8/11, f 9/10; tree edges (a,b), (b,c), (b,d), (a,e), (e,f).",
+   "repeats": [],
+   "note": "Flaw: adjacency-list order is not stated, so several discovery orders are defensible. Topic is outside the nine lectures."
+  },
+  {
+   "id": "FM-C.1",
+   "source": "FM",
+   "question": "C",
+   "part": "1",
+   "marks": 2,
+   "lecture": "L08",
+   "final_q": "Q4",
+   "topic": "Fixed-length coding",
+   "skill": "define",
+   "archetype": "D11-warm-up-recall",
+   "trap": null,
+   "given": null,
+   "text": "What is meant by fixed length coding in data representation? Give one example.",
+   "answer": "Every symbol gets a codeword of the same length (ceil(log2 n) bits for n symbols). Examples: ASCII (8 bits), Unicode (16 bits).",
+   "repeats": [],
+   "note": "This 12-mark compression section has no question number in the paper; its parts are lettered e-h."
+  },
+  {
+   "id": "FM-C.2",
+   "source": "FM",
+   "question": "C",
+   "part": "2",
+   "marks": 4,
+   "lecture": "L08",
+   "final_q": "Q4",
+   "topic": "Huffman code construction",
+   "skill": "trace",
+   "archetype": "D1-illustrate-given-algorithm",
+   "trap": null,
+   "given": {
+    "frequencies": {
+     "0": 121,
+     "1": 50,
+     "2": 203,
+     "3": 401,
+     "4": 8,
+     "5": 195
+    }
+   },
+   "text": "Digits 0-5 have frequencies 121, 50, 203, 401, 8, 195. Construct the codewords with the Huffman algorithm given at the end of the paper.",
+   "answer": "Merges: 8+50=58, 58+121=179, 179+195=374, 203+374=577, 401+577=978. Codes (left/0 = first EXTRACT-MIN): 0:1101, 1:11001, 2:10, 3:0, 4:11000, 5:111.",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-C.3",
+   "source": "FM",
+   "question": "C",
+   "part": "3",
+   "marks": 1,
+   "lecture": "L08",
+   "final_q": "Q4",
+   "topic": "Total bits",
+   "skill": "compute",
+   "archetype": "D9-read-off-own-construction",
+   "trap": "Students give the bits per codeword, or use the fixed-length total.",
+   "given": null,
+   "text": "How many bits are needed to represent the digits in the file?",
+   "answer": "Huffman: sum f*len = 2166 bits (fixed-length would need 3 x 978 = 2934; entropy bound 2.111 bits/symbol = 2064.7 bits).",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-C.4",
+   "source": "FM",
+   "question": "C",
+   "part": "4",
+   "marks": 4,
+   "lecture": "L08",
+   "final_q": "Q4",
+   "topic": "Shannon-Fano construction",
+   "skill": "trace",
+   "archetype": "D1-illustrate-given-algorithm",
+   "trap": null,
+   "given": null,
+   "text": "Construct the codewords for the same data using the Shannon-Fano algorithm.",
+   "answer": "Sorted 3,2,5,0,1,4 (401,203,195,121,50,8). Splits: {3}|{2,5,0,1,4} (401 vs 577), {2}|{5,0,1,4}, {5}|{0,1,4}, {0}|{1,4}, {1}|{4}. Codes: 0:1110, 1:11110, 2:10, 3:0, 4:11111, 5:110; total 2166 bits.",
+   "repeats": [],
+   "note": "Flaw: the paper says the Shannon-Fano algorithm is 'at the end of the paper (page 16)' but the appendix does not contain it."
+  },
+  {
+   "id": "FM-C.5",
+   "source": "FM",
+   "question": "C",
+   "part": "5",
+   "marks": 1,
+   "lecture": "L08",
+   "final_q": "Q4",
+   "topic": "Which code is optimal",
+   "skill": "justify-choice",
+   "archetype": "D9-read-off-own-construction",
+   "trap": "Students answer 'Huffman' without computing; for this data the two totals are equal.",
+   "given": null,
+   "text": "Which codeword is optimal out of the codewords constructed by Huffman and Shannon-Fano?",
+   "answer": "Both cost 2166 bits for this file, so both are optimal here. In general only Huffman is guaranteed optimal; Shannon-Fano can be worse.",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-Q5.1",
+   "source": "FM",
+   "question": "Q5",
+   "part": "1",
+   "marks": 1,
+   "lecture": "L09",
+   "final_q": "Q2",
+   "topic": "Optimal substructure",
+   "skill": "define",
+   "archetype": "D11-warm-up-recall",
+   "trap": null,
+   "given": null,
+   "text": "What is meant by optimal substructure in Dynamic Programming?",
+   "answer": "A problem has optimal substructure when an optimal solution contains within it optimal solutions to its sub-problems.",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-Q5.2",
+   "source": "FM",
+   "question": "Q5",
+   "part": "2",
+   "marks": 8,
+   "lecture": "L09",
+   "final_q": "Q2",
+   "topic": "0/1 knapsack table from P(i,k)",
+   "skill": "fill-table",
+   "archetype": "D2-dp-table-from-given-recurrence",
+   "trap": null,
+   "given": {
+    "n": 4,
+    "c": 10,
+    "w": [
+     3,
+     4,
+     6,
+     3
+    ],
+    "p": [
+     6,
+     12,
+     8,
+     2
+    ]
+   },
+   "text": "Construct a table for the 0/1 knapsack problem n = 4, c = 10, w = [3, 4, 6, 3], p = [6, 12, 8, 2] using the recursive solution given at the end of the paper.",
+   "answer": "Rows i = 4..1, columns k = 0..10: i=4: [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2]; i=3: [0, 0, 0, 2, 2, 2, 8, 8, 8, 10, 10]; i=2: [0, 0, 0, 2, 12, 12, 12, 14, 14, 14, 20]; i=1: [0, 0, 0, 6, 12, 12, 12, 18, 18, 18, 20]. P(1,10) = 20.",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-Q5.3",
+   "source": "FM",
+   "question": "Q5",
+   "part": "3",
+   "marks": 2,
+   "lecture": "L09",
+   "final_q": "Q2",
+   "topic": "Read P(i,k) values",
+   "skill": "read-off",
+   "archetype": "D9-read-off-own-construction",
+   "trap": "P(i,k) uses items i..n (the suffix). P(3,9) may use only items 3 and 4; students who use items 1..3 get 18.",
+   "given": null,
+   "text": "Find P(3,9) and P(1,10) using the recursive equations.",
+   "answer": "P(3,9) = max(P(4,9), 8 + P(4,3)) = max(2, 8 + 2) = 10. P(1,10) = max(P(2,10), 6 + P(2,7)) = max(20, 6 + 14) = 20.",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "FM-Q5.4",
+   "source": "FM",
+   "question": "Q5",
+   "part": "4",
+   "marks": 2,
+   "lecture": "L09",
+   "final_q": "Q2",
+   "topic": "Trace back the chosen items",
+   "skill": "explain",
+   "archetype": "D9-read-off-own-construction",
+   "trap": null,
+   "given": null,
+   "text": "Briefly explain how you achieved the final solution.",
+   "answer": "Start at P(1,10); for each i, if P(i,k) = P(i+1,k) item i is left out, otherwise it is taken and k drops by w_i. Optimal subsets: [2, 3]; [1, 2, 4] (both profit 20).",
+   "repeats": [],
+   "note": "Flaw: this instance has TWO optimal subsets because P(1,10) ties (20 = 6 + 14). A mock instance must have a unique optimum."
+  },
+  {
+   "id": "FM-Q5.5",
+   "source": "FM",
+   "question": "Q5",
+   "part": "5",
+   "marks": 7,
+   "lecture": "L09",
+   "final_q": "Q2",
+   "topic": "Matrix-chain m and s tables",
+   "skill": "fill-table",
+   "archetype": "D2-dp-table-from-given-recurrence",
+   "trap": "The cost term is p(i-1)*p(k)*p(j); using p(i) shifts every product. s[i,j] stores the k of the minimum, not the minimum.",
+   "given": {
+    "p": [
+     2,
+     5,
+     3,
+     10,
+     4
+    ]
+   },
+   "text": "A1..A4 have dimensions 2x5, 5x3, 3x10, 10x4. Draw the m and s tables, then give the optimal parenthesization and the optimal number of scalar multiplications.",
+   "answer": "p = [2,5,3,10,4]. m: {'1,1': 0, '1,2': 30, '1,3': 90, '1,4': 170, '2,2': 0, '2,3': 150, '2,4': 180, '3,3': 0, '3,4': 120, '4,4': 0}; s: {'1,2': 1, '1,3': 2, '1,4': 3, '2,3': 2, '2,4': 2, '3,4': 3}. Optimal (((A1A2)A3)A4) with 170 scalar multiplications.",
+   "repeats": [],
+   "note": null
+  },
+  {
+   "id": "WB-1",
+   "source": "WB",
+   "question": "1",
+   "part": "",
+   "marks": null,
+   "lecture": "L09",
+   "final_q": "Q2",
+   "topic": "Matrix-chain optimal parenthesization",
+   "skill": "fill-table",
+   "archetype": "D2-dp-table-from-given-recurrence",
+   "trap": null,
+   "given": {
+    "p": [
+     2,
+     3,
+     4,
+     5,
+     10
+    ]
+   },
+   "text": "Find the optimal parenthesization for p0 = 2, p1 = 3, p2 = 4, p3 = 5, p4 = 10 using dynamic programming.",
+   "answer": "m: {'1,1': 0, '1,2': 24, '1,3': 64, '1,4': 164, '2,2': 0, '2,3': 60, '2,4': 210, '3,3': 0, '3,4': 200, '4,4': 0}; s: {'1,2': 1, '1,3': 2, '1,4': 3, '2,3': 2, '2,4': 3, '3,4': 3}. Optimal (((A1A2)A3)A4), 164 scalar multiplications. Working: {'1,2': ['k=1: 24'], '2,3': ['k=2: 60'], '3,4': ['k=3: 200'], '1,3': ['k=1: 90', 'k=2: 64'], '2,4': ['k=2: 320', 'k=3: 210'], '1,4': ['k=1: 270', 'k=2: 304', 'k=3: 164']}.",
+   "repeats": [
+    "FM-Q5.5"
+   ],
+   "note": "The lecturer's own signal for the exam: dimensions given directly as p0..p4, not as matrix sizes."
+  },
+  {
+   "id": "WB-2",
+   "source": "WB",
+   "question": "2",
+   "part": "",
+   "marks": null,
+   "lecture": "L09",
+   "final_q": "Q2",
+   "topic": "0/1 knapsack by DP",
+   "skill": "fill-table",
+   "archetype": "D2-dp-table-from-given-recurrence",
+   "trap": null,
+   "given": {
+    "w": [
+     4,
+     3,
+     5,
+     2
+    ],
+    "p": [
+     10,
+     8,
+     9,
+     16
+    ],
+    "c": 10
+   },
+   "text": "0/1 knapsack: W = [4, 3, 5, 2], P = [10, 8, 9, 16], capacity = 10.",
+   "answer": "Rows i = 4..1, columns k = 0..10: i=4: [0, 0, 16, 16, 16, 16, 16, 16, 16, 16, 16]; i=3: [0, 0, 16, 16, 16, 16, 16, 25, 25, 25, 25]; i=2: [0, 0, 16, 16, 16, 24, 24, 25, 25, 25, 33]; i=1: [0, 0, 16, 16, 16, 24, 26, 26, 26, 34, 34]. P(1,10) = 34; take items [1, 2, 4] (weight 9, profit 34; unique optimum).",
+   "repeats": [
+    "FM-Q5.2"
+   ],
+   "note": null
+  }
+ ]
+}
